@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const playerSchema = new mongoose.Schema(
   {
+    ID: {
+      type: Number,
+      required: true,
+    },
     TeamNumber: {
       type: Number,
       required: true,
@@ -17,8 +21,7 @@ const playerSchema = new mongoose.Schema(
       trim: true,
     },
     Team: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Team",
+      type: Number,
       required: true,
     },
   },

@@ -3,13 +3,11 @@ import mongoose from "mongoose";
 const recordSchema = new mongoose.Schema(
   {
     Player: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Player",
+      type: Number,
       required: true,
     },
     Match: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Match",
+      type: Number,
       required: true,
     },
     fromMinutes: {

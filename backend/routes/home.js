@@ -4,6 +4,10 @@ import createDatabaseController from "../controllers/home/createDatabaseControll
 const homeRouter = express.Router();
 
 homeRouter.get("/", getHome);
-homeRouter.post("/matches/create", createDatabaseController);
+homeRouter.post(
+  "/matches/create",
+  express.raw({ type: "application/octet-stream", limit: "15mb" }),
+  createDatabaseController,
+);
 
 export default homeRouter;

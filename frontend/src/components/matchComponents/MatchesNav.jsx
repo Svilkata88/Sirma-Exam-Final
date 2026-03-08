@@ -1,35 +1,47 @@
 import { NavLink } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Spinner from "../others/Spinner";
+import { useDateContext } from "../../hookes/useDate";
 
 function MatchesNav() {
   const fileInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const dateRef = useRef(null);
+  const [date, setDate] = useDateContext();
 
-  function handleFileChange(files) {
-    // const formData = new FormData();
-    // formData.append("matches", files);
+  async function handleFileChange(files) {
+    // setLoading(true);
 
-    Object.values(files).forEach((file) => {
-      file.arrayBuffer().then((buffer) => {
-        fetch("http://localhost:3000/api/v1/matches/create", {
+    try {
+      for (const file of files) {
+        const buffer = await file.arrayBuffer();
+        await fetch("http://localhost:3000/api/v1/matches/create", {
           method: "POST",
           headers: {
             "Content-Type": "application/octet-stream",
+            "X-Filename": file.name,
           },
           body: buffer,
-        }).catch((err) => console.error("Error uploading csv"));
-      });
-    });
+        });
+      }
+    } catch (err) {
+      console.error("Upload failed:", err);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  return (
-    <div className="flex justify-between">
-      <form className="flex justify-center items-center w-24 rounded-full p-2 bg-gray-800 hover:bg-gray-700 cursor-pointer">
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div className="flex justify-between relative">
+      <form className="flex justify-center items-center w-12 ml-2 rounded-full bg-teal-900 hover:bg-gray-600 hover:scale-110">
         <button
-          className=""
+          className="cursor-pointer"
           type="button"
           onClick={() => fileInputRef.current.click()}
         >
-          <img src="upload.png" alt="upload" className="" />
+          <img src="/upload.png" alt="upload" className="" />
         </button>
         <div>
           <input
@@ -38,7 +50,7 @@ function MatchesNav() {
             multiple
             ref={fileInputRef}
             className="hidden"
-            onChange={(e) => {
+            onChange={async (e) => {
               const files = e.target.files;
 
               if (!files.length) {
@@ -46,7 +58,7 @@ function MatchesNav() {
                 return;
               }
 
-              handleFileChange(files);
+              await handleFileChange(files);
               e.target.value = null;
             }}
           />
@@ -56,7 +68,7 @@ function MatchesNav() {
         <NavLink
           to="/group-stage"
           className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-100 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
           }
         >
           Group Stage
@@ -64,23 +76,15 @@ function MatchesNav() {
         <NavLink
           to="/round-of-16"
           className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-200 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
-          }
-        >
-          16th Finals
-        </NavLink>
-        <NavLink
-          to="/round-of-8"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-200 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
           }
         >
           8th Finals
         </NavLink>
         <NavLink
-          to="/round-of-4"
+          to="/round-of-8"
           className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-200 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"} `
           }
         >
           4th Finals
@@ -88,7 +92,7 @@ function MatchesNav() {
         <NavLink
           to="/semi-finals"
           className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-200 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
           }
         >
           Semi-Finals
@@ -96,13 +100,48 @@ function MatchesNav() {
         <NavLink
           to="/final"
           className={({ isActive }) =>
-            `px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-200 ${isActive ? "text-emerald-950 text-xl bg-teal-600 font-bold" : "text-green-300 text-lg bg-gray-800"}`
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
           }
         >
           Grand Final
         </NavLink>
       </ul>
-      <div className="w-24"></div>
+      <form className="w-12 mr-2 cursor-pointer">
+        <img
+          src="/chose-date.png"
+          alt="chose-date"
+          className="hover:scale-110"
+          onClick={() => dateRef.current.classList.toggle("hidden")}
+        />
+
+        <select
+          ref={dateRef}
+          className="absolute top-2.5 right-14 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
+          onChange={(e) => setDate(e.target.value)}
+        >
+          <option className="font-semibold hover:text-green-500" value="iso">
+            ISO date
+          </option>
+          <option className="font-semibold hover:text-green-500" value="us">
+            US style
+          </option>
+          <option
+            className="font-semibold hover:text-green-500"
+            value="european"
+          >
+            European/International
+          </option>
+          <option
+            className="font-semibold hover:text-green-500"
+            value="written"
+          >
+            Written/Text
+          </option>
+          <option className="font-semibold hover:text-green-500" value="julian">
+            Julian/Ordinal
+          </option>
+        </select>
+      </form>
     </div>
   );
 }

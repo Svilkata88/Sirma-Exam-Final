@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 
 import connectDB from "./mongoDB/db.js";
 import homeRouter from "./routes/home.js";
+import matchRouter from "./routes/matchRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,14 +29,15 @@ app.use(
     credentials: true, // allow cookies
   }),
 );
-app.use(express.raw({ type: "application/octet-stream", limit: "15mb" }));
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/v1/", homeRouter);
+app.use("/api/v1/matches", matchRouter);
 
-// connectDB(); If db needed!
+// If db needed!
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`🖥 🖥 🖥  Server is running on http://localhost:${PORT}`);

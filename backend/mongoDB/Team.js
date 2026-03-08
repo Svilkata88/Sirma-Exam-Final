@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const teamSchema = new mongoose.Schema(
   {
+    ID: {
+      type: Number,
+      required: true,
+    },
     Name: {
       type: String,
       required: true,

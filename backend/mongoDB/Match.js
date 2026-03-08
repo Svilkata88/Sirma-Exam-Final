@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 const matchSchema = new mongoose.Schema(
   {
     ATeamID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Number,
       ref: "Team",
       required: true,
     },
     BTeamID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Number,
       ref: "Team",
       required: true,
     },
-    Date: {
+    date: {
       type: Date,
       required: true,
     },
