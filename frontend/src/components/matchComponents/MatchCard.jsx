@@ -1,12 +1,14 @@
 import { normalizedDate, findTheWinner } from "../../../utils";
 import { useDateContext } from "../../hookes/useDate";
 
-function MatchCard({ match }) {
+function MatchCard({ match, layout = "w-75 h-30 lg:w-80 xl:w-90 2xl:w-100" }) {
   const [dateType] = useDateContext();
   const [homeScore, awayScore] = findTheWinner(match.Score);
 
   return (
-    <div className="bg-zinc-200 p-3 rounded-md shadow-[0px_0px_8px_0px_rgba(179,179,188,1)] w-85 h-30">
+    <div
+      className={`bg-zinc-200 p-3 rounded-md shadow-[0px_0px_8px_0px_rgba(179,179,188,1)] ${layout}`}
+    >
       <div className="flex gap-2 justify-center items-center mb-2">
         <p className="text-sm w-1/4 bg-green-400 text-center rounded-md  w-13 text-gray-800 font-semibold">
           {homeScore > awayScore ? "winner" : ""}

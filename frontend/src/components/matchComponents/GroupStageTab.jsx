@@ -40,7 +40,7 @@ function GroupStageTab() {
         Group A
       </h2>
 
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center m-5 mb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 
@@ -58,7 +58,7 @@ function GroupStageTab() {
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200">
         Group B
       </h2>
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center m-5 mb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 
@@ -75,7 +75,7 @@ function GroupStageTab() {
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200">
         Group C
       </h2>
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center m-5 mb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 
@@ -92,7 +92,7 @@ function GroupStageTab() {
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200">
         Group D
       </h2>
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center m-5 mb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 
@@ -109,7 +109,7 @@ function GroupStageTab() {
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200">
         Group E
       </h2>
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center m-5 mb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 
@@ -126,7 +126,7 @@ function GroupStageTab() {
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200">
         Group F
       </h2>
-      <div className="grid grid-cols-3 gap-4 items-center justify-items-center mx-5 mt-5 pb-15">
+      <div className="group-container">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 

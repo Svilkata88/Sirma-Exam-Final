@@ -43,13 +43,13 @@ function MatchesNav() {
     <Spinner />
   ) : (
     <div className="flex justify-between relative">
-      <form className="flex justify-center items-center w-12 ml-2 rounded-full bg-teal-900 hover:bg-gray-600 hover:scale-110">
+      <form className="flex justify-start items-center w-24 ml-2 hover:bg-gray-600 hover:scale-110 md:w-24 h-10">
         <button
-          className="cursor-pointer"
+          className="cursor-pointer rounded-full bg-teal-900 p-1"
           type="button"
           onClick={() => fileInputRef.current.click()}
         >
-          <img src="/upload.png" alt="upload" className="" />
+          <img src="/upload.png" alt="upload" className="w-full h-full " />
         </button>
         <div>
           <input
@@ -72,7 +72,7 @@ function MatchesNav() {
           />
         </div>
       </form>
-      <ul className="flex justify-center space gap-1">
+      <ul className="flex justify-center items-center space gap-1">
         <NavLink
           to="/schema"
           className={({ isActive }) =>
@@ -124,13 +124,13 @@ function MatchesNav() {
       </ul>
       <div className="flex ">
         <form
-          className="w-10 mt-1 mr-1 cursor-pointer rounded-lg overflow-hidden"
+          className="w-10 mt-1 mr-1 cursor-pointer rounded-lg overflow-hidden md:w-10 h-10 mt-0"
           action={handleSearch}
         >
           <img
             src="/search.png"
             alt="search"
-            className="hover:scale-110"
+            className="hover:scale-110 w-full h-full object-contain"
             onClick={() => searchRef.current.classList.toggle("hidden")}
           />
           <input
@@ -140,7 +140,7 @@ function MatchesNav() {
             ref={searchRef}
           ></input>
         </form>
-        <form className="w-12 mr-2 cursor-pointer">
+        <form className="w-12 mr-2 cursor-pointer md:mr-1">
           <img
             src="/chose-date.png"
             alt="chose-date"
