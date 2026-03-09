@@ -12,7 +12,9 @@ function Final() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/api/v1/")
+    fetch(
+      `https://f-tournament-backend-739415981315.europe-west3.run.app/api/v1/`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setMatches(data.matches || []);
@@ -40,8 +42,11 @@ function Final() {
 
           if (matchDate > startDate && matchDate < endDate) {
             return (
-              <div className="flex flex-col items-center gap-10">
-                <Link to={match._id} key={match._id} className="">
+              <div
+                className="flex flex-col items-center gap-10"
+                key={match._id}
+              >
+                <Link to={match._id} className="">
                   <MatchCard match={match} />
                 </Link>
                 <section className="flex gap-3 text-zinc-100 text-2xl items-center font-bold">

@@ -16,7 +16,9 @@ function MatchDetails() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/api/v1/matches/${id}`)
+    fetch(
+      `https://f-tournament-backend-739415981315.europe-west3.run.app/api/v1/matches/${id}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setMatch(data.match || {});

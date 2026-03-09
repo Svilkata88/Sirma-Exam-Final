@@ -36,7 +36,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/", homeRouter);
 app.use("/api/v1/matches", matchRouter);
 
-// If db needed!
 connectDB();
 
 app.listen(PORT, () => {

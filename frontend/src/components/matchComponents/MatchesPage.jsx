@@ -13,7 +13,9 @@ function MatchesPage() {
     <div className="bg-gradient-to-br from-slate-800 via-green-500 to-gray-800 min-h-screen">
       <MatchesNav />
       <Routes>
-        <Route path="/schema" element={<Schema />} />
+        <Route path="/">
+          <Route index element={<Schema />} />
+        </Route>
         <Route path="/group-stage">
           <Route index element={<GroupStageTab />} />
           <Route path=":id" element={<MatchDetails />} />

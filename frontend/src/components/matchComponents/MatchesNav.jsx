@@ -74,7 +74,7 @@ function MatchesNav() {
       </form>
       <ul className="flex justify-center items-center space gap-1">
         <NavLink
-          to="/schema"
+          to="/"
           className={({ isActive }) =>
             `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
           }

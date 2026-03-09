@@ -9,7 +9,9 @@ export const MatchesProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/api/v1/")
+    fetch(
+      `https://f-tournament-backend-739415981315.europe-west3.run.app/api/v1/`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setAllMatches(data.matches || []);
