@@ -2,25 +2,32 @@ import { useEffect, useState } from "react";
 import MatchCard from "./matchCard";
 import { Link } from "react-router-dom";
 import Spinner from "../others/Spinner";
+import { useSearchContext } from "../../hookes/useSearch";
+import { useMatchContext } from "../../hookes/useMatches";
 
 function GroupStageTab() {
-  const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [allMatches, setAllMatches, matches, setMatches, loading] =
+    useMatchContext();
+  const [query] = useSearchContext();
   const endGroupDate = new Date("2024-06-26");
 
   useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:3000/api/v1/")
-      .then((res) => res.json())
-      .then((data) => {
-        setMatches(data.matches || []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+    if (!query) {
+      setMatches(allMatches);
+      return;
+    }
+
+    const lowerCasedQuery = query.toLowerCase();
+
+    const filteredMatches = allMatches.filter((m) => {
+      const ATeam = m.ATeam.Name.toLowerCase();
+      const BTeam = m.BTeam.Name.toLowerCase();
+
+      return ATeam.includes(lowerCasedQuery) || BTeam.includes(lowerCasedQuery);
+    });
+
+    setMatches(filteredMatches);
+  }, [query, allMatches]);
 
   return loading ? (
     <Spinner />

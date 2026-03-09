@@ -2,12 +2,20 @@ import { NavLink } from "react-router-dom";
 import { useRef, useState } from "react";
 import Spinner from "../others/Spinner";
 import { useDateContext } from "../../hookes/useDate";
+import { useSearchContext } from "../../hookes/useSearch";
 
 function MatchesNav() {
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const dateRef = useRef(null);
+  const searchRef = useRef(null);
   const [date, setDate] = useDateContext();
+  const [query, setQuery] = useSearchContext();
+
+  function handleSearch(formData) {
+    const searchImput = formData.get("searchImput");
+    setQuery(searchImput);
+  }
 
   async function handleFileChange(files) {
     // setLoading(true);
@@ -66,6 +74,14 @@ function MatchesNav() {
       </form>
       <ul className="flex justify-center space gap-1">
         <NavLink
+          to="/schema"
+          className={({ isActive }) =>
+            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+          }
+        >
+          Schema
+        </NavLink>
+        <NavLink
           to="/group-stage"
           className={({ isActive }) =>
             `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
@@ -106,42 +122,64 @@ function MatchesNav() {
           Grand Final
         </NavLink>
       </ul>
-      <form className="w-12 mr-2 cursor-pointer">
-        <img
-          src="/chose-date.png"
-          alt="chose-date"
-          className="hover:scale-110"
-          onClick={() => dateRef.current.classList.toggle("hidden")}
-        />
-
-        <select
-          ref={dateRef}
-          className="absolute top-2.5 right-14 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
-          onChange={(e) => setDate(e.target.value)}
+      <div className="flex ">
+        <form
+          className="w-10 mt-1 mr-1 cursor-pointer rounded-lg overflow-hidden"
+          action={handleSearch}
         >
-          <option className="font-semibold hover:text-green-500" value="iso">
-            ISO date
-          </option>
-          <option className="font-semibold hover:text-green-500" value="us">
-            US style
-          </option>
-          <option
-            className="font-semibold hover:text-green-500"
-            value="european"
+          <img
+            src="/search.png"
+            alt="search"
+            className="hover:scale-110"
+            onClick={() => searchRef.current.classList.toggle("hidden")}
+          />
+          <input
+            className="absolute top-2.5 right-26 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden pl-3"
+            name="searchImput"
+            placeholder="Search a game..."
+            ref={searchRef}
+          ></input>
+        </form>
+        <form className="w-12 mr-2 cursor-pointer">
+          <img
+            src="/chose-date.png"
+            alt="chose-date"
+            className="hover:scale-110"
+            onClick={() => dateRef.current.classList.toggle("hidden")}
+          />
+
+          <select
+            ref={dateRef}
+            className="absolute top-2.5 right-26 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
+            onChange={(e) => setDate(e.target.value)}
           >
-            European/International
-          </option>
-          <option
-            className="font-semibold hover:text-green-500"
-            value="written"
-          >
-            Written/Text
-          </option>
-          <option className="font-semibold hover:text-green-500" value="julian">
-            Julian/Ordinal
-          </option>
-        </select>
-      </form>
+            <option className="font-semibold hover:text-green-500" value="iso">
+              ISO date
+            </option>
+            <option className="font-semibold hover:text-green-500" value="us">
+              US style
+            </option>
+            <option
+              className="font-semibold hover:text-green-500"
+              value="european"
+            >
+              European/International
+            </option>
+            <option
+              className="font-semibold hover:text-green-500"
+              value="written"
+            >
+              Written/Text
+            </option>
+            <option
+              className="font-semibold hover:text-green-500"
+              value="julian"
+            >
+              Julian/Ordinal
+            </option>
+          </select>
+        </form>
+      </div>
     </div>
   );
 }
