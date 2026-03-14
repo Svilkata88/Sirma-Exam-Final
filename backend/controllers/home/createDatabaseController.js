@@ -76,9 +76,9 @@ async function createDatabaseController(req, res) {
     return res
       .status(200)
       .json({ message: `${filename}.csv inserted successfully` });
-  } catch (err) {
+  } catch (e) {
     console.log(e);
-    res.status(500).json({ message: "Failed to insert matches", error: err });
+    res.status(500).json({ message: "Failed to insert matches", error: e });
   }
 }
 
