@@ -23,14 +23,17 @@ function MatchesNav() {
     try {
       for (const file of files) {
         const buffer = await file.arrayBuffer();
-        await fetch("http://localhost:3000/api/v1/matches/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/octet-stream",
-            "X-Filename": file.name,
+        await fetch(
+          "https://f-tournament-backend-739415981315.europe-west3.run.app/api/v1/matches/create",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/octet-stream",
+              "X-Filename": file.name,
+            },
+            body: buffer,
           },
-          body: buffer,
-        });
+        );
       }
     } catch (err) {
       console.error("Upload failed:", err);
@@ -43,9 +46,9 @@ function MatchesNav() {
     <Spinner />
   ) : (
     <div className="flex justify-between relative">
-      <form className="flex justify-start items-center w-24 ml-2 hover:bg-gray-600 hover:scale-110 md:w-24 h-10">
+      <form className="flex justify-start items-center w-24 ml-2 md:w-24 h-10">
         <button
-          className="cursor-pointer rounded-full bg-teal-900 p-1"
+          className="cursor-pointer rounded-full bg-teal-900 p-1 md:p-2 mt-1 hover:bg-gray-600 hover:scale-110 "
           type="button"
           onClick={() => fileInputRef.current.click()}
         >
