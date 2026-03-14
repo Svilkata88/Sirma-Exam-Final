@@ -16,10 +16,7 @@ async function createDatabaseController(req, res) {
 
     if (filename === "matches.csv") {
       const matches = [];
-      lines.forEach((element) => {
-        map;
-      });
-      (line) => {
+      lines.forEach((line) => {
         const elements = line.split(",");
         const ID = parseInt(elements[0]);
         const ATeamID = parseInt(elements[1]);
@@ -29,7 +26,7 @@ async function createDatabaseController(req, res) {
         const match = { ID, ATeamID, BTeamID, date, Score };
 
         matches.push(match);
-      };
+      });
       await Match.insertMany(matches);
       console.log("Collection matches inserted successfully!");
     } else if (filename === "players.csv") {
@@ -79,7 +76,7 @@ async function createDatabaseController(req, res) {
     return res
       .status(200)
       .json({ message: `${filename}.csv inserted successfully` });
-  } catch (e) {
+  } catch (err) {
     console.log(e);
     res.status(500).json({ message: "Failed to insert matches", error: err });
   }
