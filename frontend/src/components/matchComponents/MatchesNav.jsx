@@ -9,6 +9,7 @@ function MatchesNav() {
   const [loading, setLoading] = useState(false);
   const dateRef = useRef(null);
   const searchRef = useRef(null);
+  const burgerRef = useRef(null);
   const [date, setDate] = useDateContext();
   const [query, setQuery] = useSearchContext();
 
@@ -45,10 +46,10 @@ function MatchesNav() {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="flex justify-between relative">
-      <form className="flex justify-start items-center w-24 ml-2 md:w-24 h-10">
+    <div className="flex justify-between relative mx-4">
+      <form className="flex justify-start items-center w-[128px] h-13 md:w-24 md:h-14">
         <button
-          className="cursor-pointer rounded-full bg-teal-900 p-1 md:p-2 mt-1 hover:bg-gray-600 hover:scale-110 "
+          className="w-[64px] h-[64px] md:w-14 md:h-14 cursor-pointer rounded-full bg-teal-900 p-3 md:p-2 mt-1 hover:bg-gray-600 hover:scale-110 "
           type="button"
           onClick={() => fileInputRef.current.click()}
         >
@@ -75,111 +76,108 @@ function MatchesNav() {
           />
         </div>
       </form>
-      <ul className="flex justify-center items-center space gap-1">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
-          }
+
+      <div className="flex flex-col gap-1 items-center">
+        <button
+          className="w-[64px] [64px] md:hidden"
+          onClick={() => burgerRef.current.classList.toggle("hidden")}
         >
-          Schema
-        </NavLink>
-        <NavLink
-          to="/group-stage"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
-          }
+          <img src="/burger.png" alt="burger" className="w-full h-full" />
+        </button>
+        <ul
+          className="hidden flex flex-col md:flex md:flex-row justify-center items-center space gap-1"
+          ref={burgerRef}
         >
-          Group Stage
-        </NavLink>
-        <NavLink
-          to="/round-of-16"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
-          }
-        >
-          8th Finals
-        </NavLink>
-        <NavLink
-          to="/round-of-8"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"} `
-          }
-        >
-          4th Finals
-        </NavLink>
-        <NavLink
-          to="/semi-finals"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
-          }
-        >
-          Semi-Finals
-        </NavLink>
-        <NavLink
-          to="/final"
-          className={({ isActive }) =>
-            `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
-          }
-        >
-          Grand Final
-        </NavLink>
-      </ul>
-      <div className="flex ">
-        <form
-          className="w-10 mt-1 mr-1 cursor-pointer rounded-lg overflow-hidden md:w-10 h-10 mt-0"
-          action={handleSearch}
-        >
-          <img
-            src="/search.png"
-            alt="search"
-            className="hover:scale-110 w-full h-full object-contain"
-            onClick={() => searchRef.current.classList.toggle("hidden")}
-          />
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+            }
+          >
+            Schema
+          </NavLink>
+          <NavLink
+            to="/group-stage"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+            }
+          >
+            Group Stage
+          </NavLink>
+          <NavLink
+            to="/round-of-16"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+            }
+          >
+            8th Finals
+          </NavLink>
+          <NavLink
+            to="/round-of-8"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"} `
+            }
+          >
+            4th Finals
+          </NavLink>
+          <NavLink
+            to="/semi-finals"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+            }
+          >
+            Semi-Finals
+          </NavLink>
+          <NavLink
+            to="/final"
+            className={({ isActive }) =>
+              `nav-main ${isActive ? "nav-active" : "nav-unactive"}`
+            }
+          >
+            Grand Final
+          </NavLink>
+        </ul>
+      </div>
+
+      <div className="flex items-start relative w-[128px] h-13 ml-2 md:w-[132px]">
+        <form className="" action={handleSearch}>
+          <div className="cursor-pointer md:w-[66px]">
+            <img
+              src="/search.png"
+              alt="search"
+              className="w-full h-full object-contain hover:scale-110 transition"
+              onClick={() => searchRef.current.classList.toggle("hidden")}
+            />
+          </div>
+
           <input
-            className="absolute top-2.5 right-26 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden pl-3"
-            name="searchImput"
+            className="absolute top-17 right-0 hidden h-12 md:w-56 bg-mauve-100 px-3 rounded-lg rounded-tr-none"
+            name="searchInput"
             placeholder="Search a game..."
             ref={searchRef}
-          ></input>
-        </form>
-        <form className="w-12 mr-2 cursor-pointer md:mr-1">
-          <img
-            src="/chose-date.png"
-            alt="chose-date"
-            className="hover:scale-110"
-            onClick={() => dateRef.current.classList.toggle("hidden")}
           />
+        </form>
+
+        <form className="">
+          <div className="cursor-pointer md:w-[68px] md:h-[70px]">
+            <img
+              src="/chose-date.png"
+              alt="chose-date"
+              className="w-full h-full object-contain hover:scale-110 transition"
+              onClick={() => dateRef.current.classList.toggle("hidden")}
+            />
+          </div>
 
           <select
             ref={dateRef}
-            className="absolute top-2.5 right-26 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
+            className="absolute top-17 right-0 h-12 md:w-28 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
             onChange={(e) => setDate(e.target.value)}
           >
-            <option className="font-semibold hover:text-green-500" value="iso">
-              ISO date
-            </option>
-            <option className="font-semibold hover:text-green-500" value="us">
-              US style
-            </option>
-            <option
-              className="font-semibold hover:text-green-500"
-              value="european"
-            >
-              European/International
-            </option>
-            <option
-              className="font-semibold hover:text-green-500"
-              value="written"
-            >
-              Written/Text
-            </option>
-            <option
-              className="font-semibold hover:text-green-500"
-              value="julian"
-            >
-              Julian/Ordinal
-            </option>
+            <option value="iso">ISO date</option>
+            <option value="us">US style</option>
+            <option value="european">European/International</option>
+            <option value="written">Written/Text</option>
+            <option value="julian">Julian/Ordinal</option>
           </select>
         </form>
       </div>

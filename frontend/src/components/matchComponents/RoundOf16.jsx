@@ -10,7 +10,7 @@ function RoundOf16() {
   const [allMatches, setAllMatches, matches, setMatches, loading] =
     useMatchContext();
   const startDate = new Date("2024-06-26");
-  const endDate = new Date("2024-07-02");
+  const endDate = new Date("2024-07-03");
   const [query] = useSearchContext();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -23,14 +23,14 @@ function RoundOf16() {
 
   // positioning the teams in the schema picture
   const positons = [
-    `absolute ${width < 768 ? "top-11" : width < 1024 ? "top-13" : "top-15"} left-2`,
-    `absolute ${width < 768 ? "top-21" : width < 1024 ? "top-23" : "top-27"} left-2`,
-    `absolute ${width < 768 ? "top-31" : width < 1024 ? "top-35" : "top-40"} left-2`,
-    `absolute ${width < 768 ? "top-41" : width < 1024 ? "top-46" : "top-52"} left-2`,
-    `absolute ${width < 768 ? "top-51" : width < 1024 ? "top-58" : "top-65"} left-2`,
-    `absolute ${width < 768 ? "top-60" : width < 1024 ? "top-69" : "top-77"} left-2`,
-    `absolute ${width < 768 ? "top-71" : width < 1024 ? "top-80" : "top-90"} left-2`,
-    `absolute ${width < 768 ? "top-80" : width < 1024 ? "top-91" : "top-102"} left-2`,
+    `absolute ${width < 640 ? "top-7" : width < 768 ? "top-9.5" : width < 1024 ? "top-11" : "top-13"} left-2`,
+    `absolute ${width < 640 ? "top-12" : width < 768 ? "top-18.5" : width < 1024 ? "top-22" : "top-24.5"} left-2`,
+    `absolute ${width < 640 ? "top-18" : width < 768 ? "top-28" : width < 1024 ? "top-33" : "top-37.5"} left-2`,
+    `absolute ${width < 640 ? "top-23" : width < 768 ? "top-37" : width < 1024 ? "top-44" : "top-49"} left-2`,
+    `absolute ${width < 640 ? "top-29" : width < 768 ? "top-47" : width < 1024 ? "top-56" : "top-62.5"} left-2`,
+    `absolute ${width < 640 ? "top-34" : width < 768 ? "top-56" : width < 1024 ? "top-67" : "top-74.5"} left-2`,
+    `absolute ${width < 640 ? "top-40" : width < 768 ? "top-65.5" : width < 1024 ? "top-78" : "top-88"} left-2`,
+    `absolute ${width < 640 ? "top-45" : width < 768 ? "top-74.5" : width < 1024 ? "top-89" : "top-99"} left-2`,
   ];
 
   // returns only matches for this tournament stage
@@ -67,8 +67,8 @@ function RoundOf16() {
       </h1>
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200"></h2>
 
-      <div className="flex flex-col gap-5 mx-5 xl:flex-row">
-        <div className="relative w-160 md:w-180 lg:w-200 m-auto rounded-lg overflow-hidden">
+      <div className="flex flex-col gap-5 mx-5 2xl:flex-row justify-center">
+        <div className="relative w-[350px] sm:w-150 md:w-180 lg:w-200 m-auto 2xl:mx-20 rounded-lg overflow-hidden">
           <img src="/schema.png" alt="schema" className="w-full h-full" />
 
           {matchesRound16.map((match, i) => {
@@ -84,7 +84,7 @@ function RoundOf16() {
           })}
         </div>
 
-        <div className="grid grid-cols-2 gap-2 items-center justify-items-center pb-5 xl:gap-3 md:w-180 m-auto">
+        <div className="flex flex-col shrink-1 sm:grid sm:grid-cols-2 gap-2 items-center justify-items-center pb-5 xl:gap-3 m-auto 2xl:mx-20">
           {matches.map((match) => {
             const matchDate = new Date(match.date);
             if (matchDate > startDate && matchDate < endDate) {
@@ -93,7 +93,7 @@ function RoundOf16() {
                   <Link to={match._id}>
                     <MatchCard
                       match={match}
-                      layout="w-75 h-26 lg:w- h-28 xl:w-70 2xl:w-90"
+                      layout="w-75 h-26 lg:w- h-28 xl:w-90 xl:h-30 2xl:w-88 2xl:h-32"
                     />
                   </Link>
                 </div>

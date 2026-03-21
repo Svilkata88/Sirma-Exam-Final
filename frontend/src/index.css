@@ -6,16 +6,20 @@
   }
 
   .nav-main {
-    @apply px-2 py-1 md:px-3 lg:px-4 py-2 rounded hover:bg-zinc-600 transition-colors duration-200 md:px-2;
+    @apply flex justify-center items-center w-full md:w-fit px-2 py-1 md:px-3 lg:px-4 py-2 rounded hover:bg-zinc-600 transition-colors duration-200;
   }
   .nav-unactive {
-    @apply text-green-300 bg-gray-800 text-sm lg:text-base;
+    @apply text-green-300 bg-gray-800 h-13 text-xl w-[50vw] md:text-base md:h-15 md:w-fit lg:text-lg xl:text-xl;
   }
   .nav-active {
-    @apply text-emerald-950 bg-teal-600 text-base font-semibold hover:text-zinc-200 md:text-base lg:text-xl;
+    @apply text-emerald-950 bg-teal-600 text-2xl h-14 font-semibold hover:text-zinc-200 md:text-lg md:h-16 lg:text-xl xl:text-2xl;
   }
 
   .group-container {
-    @apply grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4 items-center justify-items-center mx-5 mt-5 pb-15;
+    @apply flex flex-col gap-2 sm:grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4 items-center justify-items-center mx-5 mt-5 pb-15;
+  }
+
+  .match-card-header-container {
+    @apply flex lg:gap-1.5 xl:gap-3 2xl:gap-1 justify-center items-center mb-2 text-sm lg:text-base xl:text-lg 2xl:text-xl;
   }
 }

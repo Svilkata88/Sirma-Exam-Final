@@ -10,7 +10,7 @@ function SemiFinals() {
     useMatchContext();
   const [query] = useSearchContext();
   const startDate = new Date("2024-07-06");
-  const endDate = new Date("2024-07-10");
+  const endDate = new Date("2024-07-11");
 
   useEffect(() => {
     if (!query) {
