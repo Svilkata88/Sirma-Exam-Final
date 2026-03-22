@@ -39,7 +39,7 @@ function SemiFinals() {
       </h1>
       <h2 className="border-t border-gray-300 p-4 mx-5 text-green-200"></h2>
 
-      <div className="grid grid-cols-2 gap-4 items-center justify-items-center pb-10 w-2/3 m-auto">
+      <div className="flex flex-col md:grid md:grid-cols-2 gap-4 items-center justify-items-center pb-10 w-4/5 lg:w-2/3 m-auto">
         {matches.map((match) => {
           const matchDate = new Date(match.date);
 

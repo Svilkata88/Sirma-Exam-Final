@@ -47,7 +47,7 @@ function MatchesNav() {
     <Spinner />
   ) : (
     <div className="flex justify-between relative mx-4">
-      <form className="flex justify-start items-center w-[78px] md:h-13 md:w-24 md:h-14">
+      <form className="flex justify-start items-center w-[78px] h-[39px] md:h-13 md:w-24 md:h-14">
         <button
           className="w-[39px] h-[39px] md:w-14 md:h-14 cursor-pointer rounded-full bg-teal-900 p-2 md:p-2 md:mt-1 hover:bg-gray-600 hover:scale-110 "
           type="button"

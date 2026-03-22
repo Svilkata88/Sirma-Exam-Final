@@ -49,9 +49,9 @@ function Final() {
                 <Link to={match._id} className="">
                   <MatchCard match={match} />
                 </Link>
-                <section className="flex gap-3 text-zinc-100 text-2xl items-center font-bold">
+                <section className="flex gap-3 mx-4 text-zinc-100 text-base md:text-2xl items-center font-bold">
                   2024 European Football Champion is{" "}
-                  <span className="text-5xl">
+                  <span className="text-3xl md:text-5xl">
                     {homeScore > awayScore
                       ? match.ATeam.Name
                       : match.BTeam.Name}
