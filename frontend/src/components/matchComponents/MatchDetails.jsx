@@ -42,15 +42,15 @@ function MatchDetails() {
         <h1 className="text-gray-900 text-center font-bold text-lg">
           {match?.date && normalizedDate(match.date, dateType)}
         </h1>
-        <div className="flex gap-5 text-gray-900 font-bold px-3 py-2 rounded-xl">
+        <div className="flex items-center gap-2 md:gap-5 text-gray-900 font-bold px-3 py-2 rounded-xl">
           <img
             src={`/flags/${match.ATeam?.Name.toLowerCase()}.png`}
             alt={match.ATeam?.Name.toLowerCase()}
             className="w-10 h-10"
           />
-          <div className="text-2xl">{match.ATeam?.Name}</div>
-          <div className="text-2xl">{match.Score}</div>
-          <div className="text-2xl">{match.BTeam?.Name}</div>
+          <div className="text-sm md:text-2xl">{match.ATeam?.Name}</div>
+          <div className="text-sm md:text-2xl">{match.Score}</div>
+          <div className="text-sm md:text-2xl">{match.BTeam?.Name}</div>
           <img
             src={`/flags/${match.BTeam?.Name.toLowerCase()}.png`}
             alt={match.BTeam?.Name.toLowerCase()}
@@ -58,19 +58,34 @@ function MatchDetails() {
           />
         </div>
       </section>
-      <section className="flex gap-10 justify-center">
-        <FullTeamList
-          team={teamAPlayers}
-          teamName={match.ATeam?.Name}
-          manager={match.ATeam?.ManagerFullName}
-        />
-        <GameField team={teamAPlayers} />
-        <GameField team={teamBPlayers} />
-        <FullTeamList
-          team={teamBPlayers}
-          teamName={match.BTeam?.Name}
-          manager={match.BTeam?.ManagerFullName}
-        />
+      <section className="flex flex-col md:flex-row gap-5 md:gap-10 justify-center">
+        <div className="flex flex-col gap-2 xl:flex-row">
+          <div className="hidden xl:block">
+            <FullTeamList
+              team={teamBPlayers}
+              teamName={match.BTeam?.Name}
+              manager={match.BTeam?.ManagerFullName}
+            />
+          </div>
+          <GameField team={teamAPlayers} />
+          <div className="xl:hidden">
+            <FullTeamList
+              team={teamAPlayers}
+              teamName={match.ATeam?.Name}
+              manager={match.ATeam?.ManagerFullName}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 xl:flex-row">
+          <GameField team={teamBPlayers} />
+          <div className="xl:block">
+            <FullTeamList
+              team={teamAPlayers}
+              teamName={match.ATeam?.Name}
+              manager={match.ATeam?.ManagerFullName}
+            />
+          </div>
+        </div>
       </section>
     </div>
   );

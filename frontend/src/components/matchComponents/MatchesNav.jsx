@@ -14,8 +14,8 @@ function MatchesNav() {
   const [query, setQuery] = useSearchContext();
 
   function handleSearch(formData) {
-    const searchImput = formData.get("searchImput");
-    setQuery(searchImput);
+    const searchInput = formData.get("searchInput");
+    setQuery(searchInput);
   }
 
   async function handleFileChange(files) {
@@ -47,9 +47,9 @@ function MatchesNav() {
     <Spinner />
   ) : (
     <div className="flex justify-between relative mx-4">
-      <form className="flex justify-start items-center w-[128px] h-13 md:w-24 md:h-14">
+      <form className="flex justify-start items-center w-[78px] md:h-13 md:w-24 md:h-14">
         <button
-          className="w-[64px] h-[64px] md:w-14 md:h-14 cursor-pointer rounded-full bg-teal-900 p-3 md:p-2 mt-1 hover:bg-gray-600 hover:scale-110 "
+          className="w-[39px] h-[39px] md:w-14 md:h-14 cursor-pointer rounded-full bg-teal-900 p-2 md:p-2 md:mt-1 hover:bg-gray-600 hover:scale-110 "
           type="button"
           onClick={() => fileInputRef.current.click()}
         >
@@ -79,7 +79,7 @@ function MatchesNav() {
 
       <div className="flex flex-col gap-1 items-center">
         <button
-          className="w-[64px] [64px] md:hidden"
+          className="w-[39px] h-[39px] md:hidden"
           onClick={() => burgerRef.current.classList.toggle("hidden")}
         >
           <img src="/burger.png" alt="burger" className="w-full h-full" />
@@ -139,9 +139,9 @@ function MatchesNav() {
         </ul>
       </div>
 
-      <div className="flex items-start relative w-[128px] h-13 ml-2 md:w-[132px]">
+      <div className="flex items-start relative w-[78px] md:h-13 ml-2 md:w-[132px]">
         <form className="" action={handleSearch}>
-          <div className="cursor-pointer md:w-[66px]">
+          <div className="cursor-pointer w-[39px] md:w-[66px]">
             <img
               src="/search.png"
               alt="search"
@@ -151,7 +151,7 @@ function MatchesNav() {
           </div>
 
           <input
-            className="absolute top-17 right-0 hidden h-12 md:w-56 bg-mauve-100 px-3 rounded-lg rounded-tr-none"
+            className="absolute top-11 md:top-17 right-0 hidden h-12 md:w-56 bg-mauve-100 px-3 rounded-lg rounded-tr-none"
             name="searchInput"
             placeholder="Search a game..."
             ref={searchRef}
@@ -159,7 +159,7 @@ function MatchesNav() {
         </form>
 
         <form className="">
-          <div className="cursor-pointer md:w-[68px] md:h-[70px]">
+          <div className="cursor-pointer w-[39px] md:w-[68px] md:h-[70px]">
             <img
               src="/chose-date.png"
               alt="chose-date"
@@ -170,7 +170,7 @@ function MatchesNav() {
 
           <select
             ref={dateRef}
-            className="absolute top-17 right-0 h-12 md:w-28 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
+            className="absolute top-11 md:top-17 right-0 h-12 md:w-28 bg-mauve-100 p-1 rounded-lg rounded-tr-none hidden"
             onChange={(e) => setDate(e.target.value)}
           >
             <option value="iso">ISO date</option>
